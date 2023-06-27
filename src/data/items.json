@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "Aston Martin",
+    "price": 100000,
+    "imgUrl": "/imgs/astonMartin.jpg"
+  },
+  {
+    "id": 2,
+    "name": "Camaro",
+    "price": 60000,
+    "imgUrl": "/imgs/camaro.jpg"
+  },
+  {
+    "id": 3,
+    "name": "Lamborghini",
+    "price": 90000,
+    "imgUrl": "/imgs/lamborghini.jpg"
+  },
+  {
+    "id": 4,
+    "name": "Mustang",
+    "price": 45000,
+    "imgUrl": "/imgs/mustang.jpg"
+  }
+]
