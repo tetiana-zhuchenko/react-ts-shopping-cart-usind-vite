@@ -9,7 +9,8 @@ type CartItemProps = {
 }
 
 export function CartItem({ id, quantity }: CartItemProps) {
-  const { removeFromCart } = useShoppingCart()
+  const { removeFromCart, increaseCartQuantity, decreaseCartQuantity } =
+    useShoppingCart()
   const item = StoreItems.find((oneItem) => oneItem.id === id)
   if (item == null) return null
   return (
@@ -20,19 +21,40 @@ export function CartItem({ id, quantity }: CartItemProps) {
         style={{ width: '125px', height: '75px', objectFit: 'cover' }}
       />
       <div className="me-auto">
+        <div>{item.name}</div>
         <div>
-          {item.name}{' '}
-          {quantity > 1 && (
-            <span className="text-muted" style={{ fontSize: '.65rem' }}>
-              x{quantity}
+          <Button
+            variant="outline-secondary"
+            size="sm"
+            onClick={() => decreaseCartQuantity(item.id)}
+          >
+            -
+          </Button>
+          {quantity && (
+            <span className="text-muted" style={{ padding: '.5rem' }}>
+              {quantity}
             </span>
           )}
+          {/* || (
+            <span className="text-muted" style={{ padding: '.5rem' }}>
+              0
+            </span>
+          )} */}
+          <Button
+            variant="outline-secondary"
+            size="sm"
+            onClick={() => increaseCartQuantity(item.id)}
+          >
+            +
+          </Button>
         </div>
         <div className="text-muted" style={{ fontSize: '.75rem' }}>
           {formatCurrency(item.price)}
         </div>
       </div>
+
       <div> {formatCurrency(item.price * quantity)}</div>
+
       <Button
         variant="outline-danger"
         size="sm"
