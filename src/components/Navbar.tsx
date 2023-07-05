@@ -9,7 +9,7 @@ export function Navbar() {
       <Container>
         <Nav className="me-auto">
           <Nav.Link to="/" as={NavLink}>
-            Home
+            To Do List
           </Nav.Link>
           <Nav.Link to="/store" as={NavLink}>
             Store

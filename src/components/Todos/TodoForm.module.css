@@ -1,0 +1,38 @@
+.todoFormContainer form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.todoFormContainer input {
+  width: 60%;
+  height: 30px;
+  font-size: 1rem;
+}
+
+.todoFormContainer button {
+  background: none;
+  border: none;
+  color: var(--pink);
+  font-size: 1.5rem;
+  font-weight: 800;
+  background-image: linear-gradient(to right, var(--pink), var(--purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  cursor: pointer;
+  transition: 0.4s;
+  margin: 1rem;
+}
+.todoFormContainer button:hover {
+  opacity: 0.7;
+}
+
+.todoFormContainer button:active {
+  opacity: 0.5;
+}
+
+.todoFormContainer input {
+  padding: 10px 15px;
+  border: 2px solid var(--purple);
+  border-radius: 5px;
+}
