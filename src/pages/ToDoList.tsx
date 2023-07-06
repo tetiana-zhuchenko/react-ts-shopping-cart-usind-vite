@@ -1,21 +1,32 @@
 import { v4 as uuidv4 } from 'uuid'
-import { useState } from 'react'
 import '../App.css'
 import TodoList from '../components/Todos/TodoList'
 import TodoForm from '../components/Todos/TodoForm'
 import TodosActions from '../components/Todos/TodosActions'
+import { useLocalStorage } from '../hooks/useLocalStorage'
 
+const KEY_FOR_LOCAL_STORAGE = 'user-todo-items-list'
+const SALARY_FOR_COMPLETED_TODO = 500
 export type myTodoType = {
   text: string
   isCompleted: boolean
   id: string
+  salary: number
 }
 
 export function ToDoList() {
-  const [todos, setTodos] = useState<myTodoType[]>([])
+  const [todos, setTodos] = useLocalStorage<myTodoType[]>(
+    KEY_FOR_LOCAL_STORAGE,
+    []
+  )
 
   const addTodoHandler = (text: string) => {
-    const newTodo: myTodoType = { text: text, isCompleted: false, id: uuidv4() }
+    const newTodo: myTodoType = {
+      text: text,
+      isCompleted: false,
+      id: uuidv4(),
+      salary: 0,
+    }
     setTodos([...todos, newTodo])
   }
 
@@ -31,7 +42,11 @@ export function ToDoList() {
     setTodos(
       todos.map((todo) =>
         todo.id === id
-          ? { ...todo, isCompleted: !todo.isCompleted }
+          ? {
+              ...todo,
+              isCompleted: !todo.isCompleted,
+              salary: SALARY_FOR_COMPLETED_TODO,
+            }
           : { ...todo }
       )
     )

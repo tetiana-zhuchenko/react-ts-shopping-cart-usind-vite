@@ -2,6 +2,8 @@ import { useContext, createContext, ReactNode, useState } from 'react'
 import { ShoppingCart } from '../components/ShoppingCart'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 
+const KEY_FOR_LOCAL_STORAGE = 'shopping-cart-store'
+
 type ShoppingCartProwiderProps = {
   children: ReactNode
 }
@@ -31,7 +33,7 @@ export function useShoppingCart() {
 export function ShoppingCartProwider({ children }: ShoppingCartProwiderProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [cartItems, setCartItems] = useLocalStorage<CartItem[]>(
-    'shopping-cart-store',
+    KEY_FOR_LOCAL_STORAGE,
     []
   )
 
