@@ -1,6 +1,8 @@
 import { Button, Container, Nav, Navbar as NavbarBs } from 'react-bootstrap'
+import { GiMoneyStack } from 'react-icons/gi'
 import { NavLink } from 'react-router-dom'
 import { useShoppingCart } from '../context/ShoppingCartContext'
+import { IconContext } from 'react-icons'
 
 export function Navbar() {
   const { openCart, cartQuantity } = useShoppingCart()
@@ -15,12 +17,17 @@ export function Navbar() {
             Store
           </Nav.Link>
           <Nav.Link to="/about" as={NavLink}>
-            About
+            My Garage
           </Nav.Link>
         </Nav>
         <Button
           onClick={openCart}
-          style={{ width: '3rem', height: '3rem', position: 'relative' }}
+          style={{
+            width: '3rem',
+            height: '3rem',
+            margin: '.4rem',
+            position: 'relative',
+          }}
           variant="outline-primary"
           className="rounded-circle"
         >
@@ -45,6 +52,37 @@ export function Navbar() {
           >
             {cartQuantity}
           </div>
+        </Button>
+
+        <Button
+          onClick={openCart}
+          style={{
+            width: '3rem',
+            height: '3rem',
+            margin: '.4rem',
+            position: 'relative',
+          }}
+          variant="outline-primary"
+          className="rounded-circle"
+        >
+          <IconContext.Provider
+            value={{
+              size: '2rem',
+              style: {
+                verticalAlign: 'middle',
+                margin: 'auto',
+                position: 'absolute',
+                top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+              },
+              className: 'global-class-name',
+            }}
+          >
+            <div>
+              <GiMoneyStack />
+            </div>
+          </IconContext.Provider>
         </Button>
       </Container>
     </NavbarBs>
