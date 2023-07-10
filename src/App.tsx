@@ -5,18 +5,21 @@ import { Store } from './pages/Store'
 import { MyGarage } from './pages/MyGarage'
 import { Navbar } from './components/Navbar'
 import { ShoppingCartProwider } from './context/ShoppingCartContext'
+import { WalletProwider } from './context/WalletContext'
 
 function App() {
   return (
     <ShoppingCartProwider>
-      <Navbar />
-      <Container className="mb-4">
-        <Routes>
-          <Route path="/" element={<ToDoList />} />
-          <Route path="/store" element={<Store />} />
-          <Route path="/about" element={<MyGarage />} />
-        </Routes>
-      </Container>
+      <WalletProwider>
+        <Navbar />
+        <Container className="mb-4">
+          <Routes>
+            <Route path="/" element={<ToDoList />} />
+            <Route path="/store" element={<Store />} />
+            <Route path="/about" element={<MyGarage />} />
+          </Routes>
+        </Container>
+      </WalletProwider>
     </ShoppingCartProwider>
   )
 }

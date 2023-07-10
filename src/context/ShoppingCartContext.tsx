@@ -2,8 +2,6 @@ import { useContext, createContext, ReactNode, useState } from 'react'
 import { ShoppingCart } from '../components/ShoppingCart'
 import { useLocalStorage } from '../hooks/useLocalStorage'
 
-const KEY_FOR_LOCAL_STORAGE = 'shopping-cart-store'
-
 type ShoppingCartProwiderProps = {
   children: ReactNode
 }
@@ -13,7 +11,7 @@ type CartItem = {
   quantity: number
 }
 
-type ShoppingCartContext = {
+type ShoppingCartContextType = {
   openCart: () => void
   closeCart: () => void
   getItemQuantity: (id: number) => number
@@ -24,7 +22,8 @@ type ShoppingCartContext = {
   cartItems: CartItem[]
 }
 
-const ShoppingCartContext = createContext({} as ShoppingCartContext)
+const KEY_FOR_LOCAL_STORAGE = 'shopping-cart-store'
+const ShoppingCartContext = createContext({} as ShoppingCartContextType)
 
 export function useShoppingCart() {
   return useContext(ShoppingCartContext)

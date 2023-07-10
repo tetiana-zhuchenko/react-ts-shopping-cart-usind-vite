@@ -1,6 +1,6 @@
 import { Button, Offcanvas, Stack } from 'react-bootstrap'
 import { useShoppingCart } from '../context/ShoppingCartContext'
-import { CartItem } from './CartItem'
+
 import { formatCurrency } from '../utilities/formatCurrency'
 import StoreItems from '../data/items.json'
 
@@ -18,20 +18,6 @@ export function ShoppingCart({ isOpen }: ShoppingCartPops) {
         </Offcanvas.Header>
         <Offcanvas.Body>
           <Stack gap={3}>
-            {cartItems.map((item) => (
-              <CartItem key={item.id} {...item} />
-            ))}
-            <div className="ms-auto fw-bold fs-5">
-              Total:{' '}
-              {formatCurrency(
-                cartItems.reduce((total, cartItem) => {
-                  const item = StoreItems.find(
-                    (oneItem) => oneItem.id === cartItem.id
-                  )
-                  return total + (item?.price || 0) * cartItem.quantity
-                }, 0)
-              )}
-            </div>
             <div className="m-auto fw-bold fs-7">
               Aviable money:{' '}
               <span>

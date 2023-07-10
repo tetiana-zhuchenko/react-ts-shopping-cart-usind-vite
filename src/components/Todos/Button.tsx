@@ -14,7 +14,6 @@ function Button({
   title,
   disabled = false,
 }: buttonPropsType) {
-  console.log(disabled)
   return (
     <button
       className={styles.button}
