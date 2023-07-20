@@ -3,9 +3,11 @@ import { GiMoneyStack } from 'react-icons/gi'
 import { NavLink } from 'react-router-dom'
 import { useShoppingCart } from '../context/ShoppingCartContext'
 import { IconContext } from 'react-icons'
+import { useWallet } from '../context/WalletContext'
 
 export function Navbar() {
   const { openCart, cartQuantity } = useShoppingCart()
+  const { openWallet, currentMoneyAmount } = useWallet()
   return (
     <NavbarBs sticky="top" className="bg-white shadow-sm mb-3">
       <Container>
@@ -13,10 +15,10 @@ export function Navbar() {
           <Nav.Link to="/" as={NavLink}>
             To Do List
           </Nav.Link>
-          <Nav.Link to="/store" as={NavLink}>
-            Store
+          <Nav.Link to="/car-showroom" as={NavLink}>
+            Car Showroom
           </Nav.Link>
-          <Nav.Link to="/about" as={NavLink}>
+          <Nav.Link to="/my-garage" as={NavLink}>
             My Garage
           </Nav.Link>
         </Nav>
@@ -55,7 +57,7 @@ export function Navbar() {
         </Button>
 
         <Button
-          onClick={openCart}
+          onClick={openWallet}
           style={{
             width: '3rem',
             height: '3rem',

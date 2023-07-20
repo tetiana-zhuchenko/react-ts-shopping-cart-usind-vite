@@ -1,15 +1,18 @@
 import { useContext, createContext, ReactNode, useState } from 'react'
 import { useLocalStorage } from '../hooks/useLocalStorage'
-
-type WalletProwiderProps = {
+import { Wallet } from '../components/Wallet'
+type WalletProwiderPropsType = {
   children: ReactNode
 }
 
 type WalletContextType = {
-  // addMoneyInfoToWallet: (moneyInfo: MoneyInfoType) => void
+  openWallet: () => void
+  closeWallet: () => void
   addMoneyToWallet: (moneyAmount: number) => void
-  spendMoneyFromWallet: (moneyAmount: number) => void
+  subtractMoneyFromWallet: (moneyAmount: number) => void
   getCurrentWalletMoneyAmount: () => number
+  resetMoneyAmount: () => void
+
   currentMoneyAmount: number
 }
 
@@ -20,32 +23,49 @@ export function useWallet() {
   return useContext(WalletContext)
 }
 
-export function WalletProwider({ children }: WalletProwiderProps) {
-  const [currentMoneyAmount, setCurrentMoneyAmount] = useState<number>(0)
+export function WalletProwider({ children }: WalletProwiderPropsType) {
+  const [isOpen, setIsOpen] = useState(false)
+
+  const [currentMoneyAmount, setCurrentMoneyAmount] = useLocalStorage<number>(
+    KEY_FOR_LOCAL_STORAGE,
+    0
+  )
+
+  const openWallet = () => setIsOpen(true)
+  const closeWallet = () => setIsOpen(false)
 
   function addMoneyToWallet(moneyAmount: number) {
-    prompt("Are you shure, that you've completed todo")
-    setCurrentMoneyAmount(() => currentMoneyAmount + moneyAmount)
+    return setCurrentMoneyAmount(() => currentMoneyAmount + moneyAmount)
   }
 
-  function spendMoneyFromWallet(moneyAmount: number) {
-    setCurrentMoneyAmount(() => currentMoneyAmount - moneyAmount)
+  function subtractMoneyFromWallet(moneyAmount: number) {
+    console.log('you bye')
+    return setCurrentMoneyAmount(() => currentMoneyAmount - moneyAmount)
   }
 
   function getCurrentWalletMoneyAmount() {
     return currentMoneyAmount
   }
 
+  function resetMoneyAmount() {
+    return setCurrentMoneyAmount(0)
+  }
+
   return (
     <WalletContext.Provider
       value={{
         addMoneyToWallet,
-        spendMoneyFromWallet,
         getCurrentWalletMoneyAmount,
+        openWallet,
+        closeWallet,
+        subtractMoneyFromWallet,
+        resetMoneyAmount,
+
         currentMoneyAmount,
       }}
     >
       {children}
+      <Wallet isOpen={isOpen} />
     </WalletContext.Provider>
   )
 }

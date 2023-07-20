@@ -1,6 +1,6 @@
 import { Button, Stack } from 'react-bootstrap'
 import { useShoppingCart } from '../context/ShoppingCartContext'
-import StoreItems from '../data/items.json'
+import CarShowroomItems from '../data/items.json'
 import { formatCurrency } from '../utilities/formatCurrency'
 
 type CartItemProps = {
@@ -11,7 +11,8 @@ type CartItemProps = {
 export function CartItem({ id, quantity }: CartItemProps) {
   const { removeFromCart, increaseCartQuantity, decreaseCartQuantity } =
     useShoppingCart()
-  const item = StoreItems.find((oneItem) => oneItem.id === id)
+
+  const item = CarShowroomItems.find((oneItem) => oneItem.id === id)
   if (item == null) return null
   return (
     <Stack direction="horizontal" gap={2} className="d-flex align-items-center">
@@ -35,11 +36,7 @@ export function CartItem({ id, quantity }: CartItemProps) {
               {quantity}
             </span>
           )}
-          {/* || (
-            <span className="text-muted" style={{ padding: '.5rem' }}>
-              0
-            </span>
-          )} */}
+
           <Button
             variant="outline-secondary"
             size="sm"

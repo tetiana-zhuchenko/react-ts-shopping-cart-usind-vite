@@ -2,19 +2,19 @@
   {
     "id": 1,
     "name": "Aston Martin",
-    "price": 100000,
+    "price": 1000,
     "imgUrl": "/imgs/astonMartin.jpg"
   },
   {
     "id": 2,
     "name": "Camaro",
-    "price": 60000,
+    "price": 600,
     "imgUrl": "/imgs/camaro.jpg"
   },
   {
     "id": 3,
     "name": "Lamborghini",
-    "price": 90000,
+    "price": 900,
     "imgUrl": "/imgs/lamborghini.jpg"
   },
   {

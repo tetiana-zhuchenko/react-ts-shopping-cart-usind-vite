@@ -4,9 +4,10 @@ import TodoList from '../components/Todos/TodoList'
 import TodoForm from '../components/Todos/TodoForm'
 import TodosActions from '../components/Todos/TodosActions'
 import { useLocalStorage } from '../hooks/useLocalStorage'
+import { useWallet } from '../context/WalletContext'
 
 const KEY_FOR_LOCAL_STORAGE = 'user-todo-items-list'
-const SALARY_FOR_COMPLETED_TODO = 500
+const SALARY_FOR_COMPLETED_TODO = 1000
 export type myTodoType = {
   text: string
   isCompleted: boolean
@@ -19,6 +20,8 @@ export function ToDoList() {
     KEY_FOR_LOCAL_STORAGE,
     []
   )
+
+  const { addMoneyToWallet, subtractMoneyFromWallet } = useWallet()
 
   const addTodoHandler = (text: string) => {
     const newTodo: myTodoType = {
@@ -40,15 +43,27 @@ export function ToDoList() {
 
   const toggleTodoHandler = (id: string) => {
     setTodos(
-      todos.map((todo) =>
-        todo.id === id
-          ? {
+      todos.map((todo) => {
+        if (todo.id === id) {
+          if (todo.salary === 0) {
+            addMoneyToWallet(SALARY_FOR_COMPLETED_TODO)
+            return {
               ...todo,
               isCompleted: !todo.isCompleted,
               salary: SALARY_FOR_COMPLETED_TODO,
             }
-          : { ...todo }
-      )
+          } else {
+            subtractMoneyFromWallet(SALARY_FOR_COMPLETED_TODO)
+            return {
+              ...todo,
+              isCompleted: !todo.isCompleted,
+              salary: 0,
+            }
+          }
+        } else {
+          return { ...todo }
+        }
+      })
     )
   }
 
@@ -64,7 +79,7 @@ export function ToDoList() {
 
   return (
     <div className="App">
-      <h1>Todo App</h1>
+      <h1>Todo List</h1>
       <TodoForm addTodo={addTodoHandler} />
       {todos.length > 0 && (
         <TodosActions

@@ -1,12 +1,13 @@
 import { useContext, createContext, ReactNode, useState } from 'react'
 import { ShoppingCart } from '../components/ShoppingCart'
 import { useLocalStorage } from '../hooks/useLocalStorage'
+import { useMyGarageContext } from './MyGarageContext'
 
 type ShoppingCartProwiderProps = {
   children: ReactNode
 }
 
-type CartItem = {
+export type CartItem = {
   id: number
   quantity: number
 }
@@ -18,11 +19,13 @@ type ShoppingCartContextType = {
   increaseCartQuantity: (id: number) => void
   decreaseCartQuantity: (id: number) => void
   removeFromCart: (id: number) => void
+  clearCartAddItemsToGarage: () => void
   cartQuantity: number
   cartItems: CartItem[]
 }
 
-const KEY_FOR_LOCAL_STORAGE = 'shopping-cart-store'
+const KEY_FOR_LOCAL_STORAGE_SHOPPING_CART = 'shopping-cart-store'
+
 const ShoppingCartContext = createContext({} as ShoppingCartContextType)
 
 export function useShoppingCart() {
@@ -32,9 +35,10 @@ export function useShoppingCart() {
 export function ShoppingCartProwider({ children }: ShoppingCartProwiderProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [cartItems, setCartItems] = useLocalStorage<CartItem[]>(
-    KEY_FOR_LOCAL_STORAGE,
+    KEY_FOR_LOCAL_STORAGE_SHOPPING_CART,
     []
   )
+  const { myGarageItems, setMyGarageItems } = useMyGarageContext()
 
   const cartQuantity = cartItems.reduce(
     (quantity, item) => item.quantity + quantity,
@@ -78,9 +82,33 @@ export function ShoppingCartProwider({ children }: ShoppingCartProwiderProps) {
     })
   }
   function removeFromCart(id: number) {
-    setCartItems((currentItems) =>
-      currentItems.filter((item) => item.id !== id)
-    )
+    setCartItems((currentItems) => {
+      return currentItems.filter((item) => item.id !== id)
+    })
+  }
+
+  function clearCartAddItemsToGarage() {
+    setCartItems((currentItems: CartItem[] | undefined) => {
+      const totalsItemsList: CartItem[] = [
+        ...myGarageItems,
+        ...(currentItems || []),
+      ].reduce((acc: CartItem[], item) => {
+        const existingObject: CartItem | undefined = acc.find(
+          (obj: CartItem) => obj.id === item.id
+        )
+        if (existingObject) {
+          existingObject.quantity += item.quantity
+        } else {
+          acc.push(item)
+        }
+        return acc
+      }, [])
+      // make one array from currentItems and mygarageItems
+      setMyGarageItems([...totalsItemsList])
+      // add date of purchace
+      // add reducer of quantity
+      return []
+    })
   }
 
   return (
@@ -92,6 +120,7 @@ export function ShoppingCartProwider({ children }: ShoppingCartProwiderProps) {
         removeFromCart,
         openCart,
         closeCart,
+        clearCartAddItemsToGarage,
         cartItems,
         cartQuantity,
       }}

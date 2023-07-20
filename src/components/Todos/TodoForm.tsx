@@ -1,9 +1,13 @@
 import { useState } from 'react'
 import styles from './TodoForm.module.css'
 
-function TodoForm({ addTodo }) {
+type TodoFormPropsType = {
+  addTodo: (text: string) => void
+}
+
+function TodoForm({ addTodo }: TodoFormPropsType) {
   const [text, setText] = useState('')
-  const onSubmitHandler = (event) => {
+  const onSubmitHandler = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
     addTodo(text)

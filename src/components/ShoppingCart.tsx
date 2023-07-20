@@ -2,14 +2,33 @@ import { Button, Offcanvas, Stack } from 'react-bootstrap'
 import { useShoppingCart } from '../context/ShoppingCartContext'
 import { CartItem } from './CartItem'
 import { formatCurrency } from '../utilities/formatCurrency'
-import StoreItems from '../data/items.json'
+import CarShowroomItems from '../data/items.json'
+import { useWallet } from '../context/WalletContext'
 
-type ShoppingCartPops = {
+type ShoppingCartPopsType = {
   isOpen: boolean
 }
 
-export function ShoppingCart({ isOpen }: ShoppingCartPops) {
-  const { closeCart, cartItems } = useShoppingCart()
+export function ShoppingCart({ isOpen }: ShoppingCartPopsType) {
+  const { closeCart, cartItems, clearCartAddItemsToGarage } = useShoppingCart()
+  const { currentMoneyAmount, subtractMoneyFromWallet } = useWallet()
+
+  const totalPurchaseCost: number = cartItems.reduce((total, cartItem) => {
+    const item = CarShowroomItems.find((oneItem) => oneItem.id === cartItem.id)
+    return total + (item?.price || 0) * cartItem.quantity
+  }, 0)
+
+  function buyProducts(currentMoneyAmount: number, totalPurchaseCost: number) {
+    if (currentMoneyAmount >= totalPurchaseCost) {
+      subtractMoneyFromWallet(totalPurchaseCost)
+      clearCartAddItemsToGarage()
+
+      return
+    }
+
+    console.log('you have not aviable money')
+  }
+
   return (
     <>
       <Offcanvas show={isOpen} onHide={closeCart} placement="end">
@@ -22,30 +41,16 @@ export function ShoppingCart({ isOpen }: ShoppingCartPops) {
               <CartItem key={item.id} {...item} />
             ))}
             <div className="ms-auto fw-bold fs-5">
-              Total:{' '}
-              {formatCurrency(
-                cartItems.reduce((total, cartItem) => {
-                  const item = StoreItems.find(
-                    (oneItem) => oneItem.id === cartItem.id
-                  )
-                  return total + (item?.price || 0) * cartItem.quantity
-                }, 0)
-              )}
+              Total: {formatCurrency(totalPurchaseCost)}
             </div>
             <div className="m-auto fw-bold fs-7">
-              Aviable money:{' '}
-              <span>
-                {formatCurrency(
-                  cartItems.reduce((total, cartItem) => {
-                    const item = StoreItems.find(
-                      (oneItem) => oneItem.id === cartItem.id
-                    )
-                    return total + (item?.price || 0) * cartItem.quantity
-                  }, 0)
-                )}
-              </span>
+              Aviable money: <span>{formatCurrency(currentMoneyAmount)}</span>
             </div>
-            <Button>Buy</Button>
+            <Button
+              onClick={() => buyProducts(currentMoneyAmount, totalPurchaseCost)}
+            >
+              Purchase
+            </Button>
           </Stack>
         </Offcanvas.Body>
       </Offcanvas>

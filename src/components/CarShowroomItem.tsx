@@ -2,14 +2,19 @@ import { Button, Card } from 'react-bootstrap'
 import { formatCurrency } from '../utilities/formatCurrency'
 import { useShoppingCart } from '../context/ShoppingCartContext'
 
-type StoreItemProps = {
+type CarShowroomItemProps = {
   id: number
   name: string
   price: number
   imgUrl: string
 }
 
-export function StoreItem({ id, name, price, imgUrl }: StoreItemProps) {
+export function CarShowroomItem({
+  id,
+  name,
+  price,
+  imgUrl,
+}: CarShowroomItemProps) {
   const {
     getItemQuantity,
     increaseCartQuantity,

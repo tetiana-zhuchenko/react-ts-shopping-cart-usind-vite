@@ -1,37 +1,25 @@
 import { Button, Offcanvas, Stack } from 'react-bootstrap'
-import { useShoppingCart } from '../context/ShoppingCartContext'
+import { useWallet } from '../context/WalletContext'
 
 import { formatCurrency } from '../utilities/formatCurrency'
-import StoreItems from '../data/items.json'
 
-type ShoppingCartPops = {
+type WalletPopsType = {
   isOpen: boolean
 }
 
-export function ShoppingCart({ isOpen }: ShoppingCartPops) {
-  const { closeCart, cartItems } = useShoppingCart()
+export function Wallet({ isOpen }: WalletPopsType) {
+  const { closeWallet, currentMoneyAmount } = useWallet()
   return (
     <>
-      <Offcanvas show={isOpen} onHide={closeCart} placement="end">
+      <Offcanvas show={isOpen} onHide={closeWallet} placement="end">
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Cart</Offcanvas.Title>
+          <Offcanvas.Title>My money</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <Stack gap={3}>
             <div className="m-auto fw-bold fs-7">
-              Aviable money:{' '}
-              <span>
-                {formatCurrency(
-                  cartItems.reduce((total, cartItem) => {
-                    const item = StoreItems.find(
-                      (oneItem) => oneItem.id === cartItem.id
-                    )
-                    return total + (item?.price || 0) * cartItem.quantity
-                  }, 0)
-                )}
-              </span>
+              Aviable money: <span>{formatCurrency(currentMoneyAmount)}</span>
             </div>
-            <Button>Buy</Button>
           </Stack>
         </Offcanvas.Body>
       </Offcanvas>
