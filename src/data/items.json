@@ -1,26 +1,76 @@
 [
   {
     "id": 1,
-    "name": "Aston Martin",
-    "price": 1000,
-    "imgUrl": "/imgs/astonMartin.jpg"
+    "name": "Mustang",
+    "price": 500,
+    "imgUrl": "/imgs/Mustang.jpg"
   },
+
   {
     "id": 2,
-    "name": "Camaro",
-    "price": 600,
-    "imgUrl": "/imgs/camaro.jpg"
+    "name": "Aston Martin",
+    "price": 1000,
+    "imgUrl": "/imgs/AstonMartin.jpg"
   },
   {
     "id": 3,
-    "name": "Lamborghini",
-    "price": 900,
-    "imgUrl": "/imgs/lamborghini.jpg"
+    "name": "Camaro",
+    "price": 600,
+    "imgUrl": "/imgs/Camaro.jpg"
   },
   {
     "id": 4,
-    "name": "Mustang",
-    "price": 45000,
-    "imgUrl": "/imgs/mustang.jpg"
+    "name": "Lamborghini",
+    "price": 90000,
+    "imgUrl": "/imgs/Lamborghini.jpg"
+  },
+
+  {
+    "id": 5,
+    "name": "Chevrolet Chevelle",
+    "price": 71000,
+    "imgUrl": "/imgs/1970ChevroletChevelleSS.jpg"
+  },
+  {
+    "id": 6,
+    "name": "Audi TTRS",
+    "price": 62000,
+    "imgUrl": "/imgs/2021AudiTTRS.jpg"
+  },
+  {
+    "id": 7,
+    "name": "BMV M5",
+    "price": 29000,
+    "imgUrl": "/imgs/BMVM5.jpg"
+  },
+  {
+    "id": 8,
+    "name": "Mersedes AMG",
+    "price": 25000,
+    "imgUrl": "/imgs/MersedesAMG.jpg"
+  },
+  {
+    "id": 9,
+    "name": "Mini Cooper",
+    "price": 15000,
+    "imgUrl": "/imgs/MiniCooper.jpg"
+  },
+  {
+    "id": 10,
+    "name": "Porsche Cayman",
+    "price": 85000,
+    "imgUrl": "/imgs/Porsche718Cayman.jpg"
+  },
+  {
+    "id": 11,
+    "name": "Mersedes AMG GTS",
+    "price": 50000,
+    "imgUrl": "/imgs/MersedesAMGGTS.jpg"
+  },
+  {
+    "id": 12,
+    "name": "Mustang 1972",
+    "price": 95000,
+    "imgUrl": "/imgs/1972FordMustang.jpg"
   }
 ]

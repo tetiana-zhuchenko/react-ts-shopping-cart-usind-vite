@@ -103,10 +103,9 @@ export function ShoppingCartProwider({ children }: ShoppingCartProwiderProps) {
         }
         return acc
       }, [])
-      // make one array from currentItems and mygarageItems
+
       setMyGarageItems([...totalsItemsList])
-      // add date of purchace
-      // add reducer of quantity
+
       return []
     })
   }

@@ -1,4 +1,4 @@
-import { Button, Offcanvas, Stack } from 'react-bootstrap'
+import { Offcanvas, Stack } from 'react-bootstrap'
 import { useWallet } from '../context/WalletContext'
 
 import { formatCurrency } from '../utilities/formatCurrency'

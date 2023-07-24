@@ -7,22 +7,25 @@ import { Navbar } from './components/Navbar'
 import { ShoppingCartProwider } from './context/ShoppingCartContext'
 import { WalletProwider } from './context/WalletContext'
 import { MyGarageProwider } from './context/MyGarageContext'
+import { ModalWindowProwider } from './context/ModalWindowContext'
 
 function App() {
   return (
     <WalletProwider>
-      <MyGarageProwider>
-        <ShoppingCartProwider>
-          <Navbar />
-          <Container className="mb-4">
-            <Routes>
-              <Route path="/" element={<ToDoList />} />
-              <Route path="/car-showroom" element={<CarShowroom />} />
-              <Route path="/my-garage" element={<MyGarage />} />
-            </Routes>
-          </Container>
-        </ShoppingCartProwider>
-      </MyGarageProwider>
+      <ModalWindowProwider>
+        <MyGarageProwider>
+          <ShoppingCartProwider>
+            <Navbar />
+            <Container className="mb-4">
+              <Routes>
+                <Route path="/" element={<ToDoList />} />
+                <Route path="/car-showroom" element={<CarShowroom />} />
+                <Route path="/my-garage" element={<MyGarage />} />
+              </Routes>
+            </Container>
+          </ShoppingCartProwider>
+        </MyGarageProwider>
+      </ModalWindowProwider>
     </WalletProwider>
   )
 }

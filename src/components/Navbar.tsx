@@ -7,7 +7,7 @@ import { useWallet } from '../context/WalletContext'
 
 export function Navbar() {
   const { openCart, cartQuantity } = useShoppingCart()
-  const { openWallet, currentMoneyAmount } = useWallet()
+  const { openWallet } = useWallet()
   return (
     <NavbarBs sticky="top" className="bg-white shadow-sm mb-3">
       <Container>

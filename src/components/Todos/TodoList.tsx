@@ -1,5 +1,4 @@
 import Todo from './Todo'
-import styles from './TodoList.module.css'
 import { myTodoType } from '../../pages/ToDoList'
 
 type todoListPropsType = {
@@ -10,7 +9,7 @@ type todoListPropsType = {
 
 function TodoList({ todos, deleteTodo, toggleTodo }: todoListPropsType) {
   return (
-    <div className={styles.todoListContainer}>
+    <div>
       {!todos.length && <h2>Todo list is empty</h2>}
       {todos.map((todo) => {
         return (

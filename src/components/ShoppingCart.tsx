@@ -4,6 +4,8 @@ import { CartItem } from './CartItem'
 import { formatCurrency } from '../utilities/formatCurrency'
 import CarShowroomItems from '../data/items.json'
 import { useWallet } from '../context/WalletContext'
+import { ModalWindow } from './ModalWindow'
+import { useModalWindow } from '../context/ModalWindowContext'
 
 type ShoppingCartPopsType = {
   isOpen: boolean
@@ -12,6 +14,7 @@ type ShoppingCartPopsType = {
 export function ShoppingCart({ isOpen }: ShoppingCartPopsType) {
   const { closeCart, cartItems, clearCartAddItemsToGarage } = useShoppingCart()
   const { currentMoneyAmount, subtractMoneyFromWallet } = useWallet()
+  const { handleShow, showModal } = useModalWindow()
 
   const totalPurchaseCost: number = cartItems.reduce((total, cartItem) => {
     const item = CarShowroomItems.find((oneItem) => oneItem.id === cartItem.id)
@@ -22,11 +25,12 @@ export function ShoppingCart({ isOpen }: ShoppingCartPopsType) {
     if (currentMoneyAmount >= totalPurchaseCost) {
       subtractMoneyFromWallet(totalPurchaseCost)
       clearCartAddItemsToGarage()
-
+      closeCart()
       return
     }
-
-    console.log('you have not aviable money')
+    if (currentMoneyAmount <= totalPurchaseCost) {
+      handleShow()
+    }
   }
 
   return (
@@ -54,6 +58,7 @@ export function ShoppingCart({ isOpen }: ShoppingCartPopsType) {
           </Stack>
         </Offcanvas.Body>
       </Offcanvas>
+      <ModalWindow showModal={showModal}></ModalWindow>
     </>
   )
 }
