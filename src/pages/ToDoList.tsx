@@ -79,7 +79,7 @@ export function ToDoList() {
 
   return (
     <div className="App">
-      <h1>Todo List</h1>
+      <h1>To-Do List</h1>
       <TodoForm addTodo={addTodoHandler} />
       {todos.length > 0 && (
         <TodosActions
