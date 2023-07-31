@@ -19,8 +19,9 @@ function App() {
             <Container className="mb-4">
               <Routes>
                 <Route path="/" element={<ToDoList />} />
-                <Route path="/car-showroom" element={<CarShowroom />} />
-                <Route path="/my-garage" element={<MyGarage />} />
+                <Route path="car-showroom" element={<CarShowroom />} />
+                <Route path="my-garage" element={<MyGarage />} />
+                <Route path="*" element={<h1>Not Found</h1>} />
               </Routes>
             </Container>
           </ShoppingCartProwider>
