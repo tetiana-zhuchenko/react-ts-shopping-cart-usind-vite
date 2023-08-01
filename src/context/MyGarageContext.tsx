@@ -25,7 +25,6 @@ export function MyGarageProwider({ children }: MyGarageProwiderProps) {
     []
   )
 
-  console.log(myGarageItems)
   return (
     <MyGarageContext.Provider
       value={{

@@ -13,13 +13,13 @@ export function Navbar() {
       <Container>
         <Nav className="me-auto">
           <Nav.Link to="/" as={NavLink}>
-            To Do List
+            To-Dos
           </Nav.Link>
           <Nav.Link to="/car-showroom" as={NavLink}>
             Car Showroom
           </Nav.Link>
           <Nav.Link to="/my-garage" as={NavLink}>
-            My Garage
+            Garage
           </Nav.Link>
         </Nav>
         <Button

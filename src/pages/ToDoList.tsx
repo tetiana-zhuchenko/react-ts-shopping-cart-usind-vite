@@ -95,7 +95,7 @@ export function ToDoList() {
       />
       {completedTodosCount > 0 && (
         <h5>{`You have completed ${completedTodosCount} ${
-          completedTodosCount > 1 ? 'todos' : 'todo'
+          completedTodosCount > 1 ? 'To-Dos' : 'To-Do'
         }`}</h5>
       )}
     </div>

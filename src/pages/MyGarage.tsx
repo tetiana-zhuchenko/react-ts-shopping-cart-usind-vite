@@ -6,7 +6,7 @@ export function MyGarage() {
   const { myGarageItems } = useMyGarageContext()
   return (
     <>
-      <h1>My Garage</h1>
+      <h1>Garage</h1>
       <Row md={2} xs={1} lg={3} className="g-3">
         {myGarageItems.map((oneItem) => (
           <Col key={oneItem.id}>

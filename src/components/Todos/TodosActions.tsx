@@ -15,14 +15,14 @@ function TodosActions({
   return (
     <>
       <Button
-        title="Reset Todos"
+        title="Reset To-Dos"
         onClick={resetTodos}
         disabled={!!completedTodosExist}
       >
         <RiRefreshLine />
       </Button>
       <Button
-        title="Clear Completed Todos"
+        title="Clear Completed To-Dos"
         onClick={deleteCompletedTodos}
         disabled={!completedTodosExist}
       >
