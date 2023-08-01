@@ -29,6 +29,7 @@ export function CarShowroomItem({
         src={imgUrl}
         height="260px"
         style={{ objectFit: 'cover' }}
+        alt={name}
       />
       <Card.Body className="d-flex flex-column">
         <Card.Title className="d-flex justify-content-between align-items-baseline mb-4">

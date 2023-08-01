@@ -39,7 +39,6 @@ export function WalletProwider({ children }: WalletProwiderPropsType) {
   }
 
   function subtractMoneyFromWallet(moneyAmount: number) {
-    console.log('you bye')
     return setCurrentMoneyAmount(() => currentMoneyAmount - moneyAmount)
   }
 
