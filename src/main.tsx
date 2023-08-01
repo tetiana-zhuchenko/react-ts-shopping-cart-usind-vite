@@ -7,7 +7,7 @@ import App from './App.tsx'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <HashRouter>
+    <HashRouter basename={process.env.PUBLIC_URL}>
       <App />
     </HashRouter>
   </React.StrictMode>
